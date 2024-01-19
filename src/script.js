@@ -74,8 +74,6 @@ const planets = [
 ]
 
 scene.add(sun)
-scene.add(earth)
-earth.add(moon)
 
 // initialize the camera
 const camera = new THREE.PerspectiveCamera(
