@@ -8,14 +8,57 @@ const pane = new Pane()
 // initialize the scene
 const scene = new THREE.Scene()
 
+// add textureLoader
+const textureLoader = new THREE.TextureLoader()
+// const cubeTextureLoader = new THREE.CubeTextureLoader()
+// cubeTextureLoader.setPath('/textures/cubeMap/')
+
+// adding textures
+const sunTexture = textureLoader.load("/textures/2k_sun.jpg")
+const mercuryTexture = textureLoader.load("/textures/2k_mercury.jpg")
+const venusTexture = textureLoader.load("/textures/2k_venus_surface.jpg")
+const earthTexture = textureLoader.load("/textures/2k_earth_daymap.jpg")
+const marsTexture = textureLoader.load("/textures/2k_mars.jpg")
+const moonTexture = textureLoader.load("/textures/2k_moon.jpg")
+
+// const backgroundCubemap = cubeTextureLoader
+// .load( [
+//   'px.png',
+//   'nx.png',
+//   'py.png',
+//   'ny.png',
+//   'pz.png',
+//   'nz.png'
+// ] );
+
+// scene.background = backgroundCubemap
+
+// add materials
+const mercuryMaterial = new THREE.MeshStandardMaterial({
+	map: mercuryTexture
+})
+const venusMaterial = new THREE.MeshStandardMaterial({
+	map: venusTexture
+})
+const earthMaterial = new THREE.MeshStandardMaterial({
+	map: earthTexture
+})
+const marsMaterial = new THREE.MeshStandardMaterial({
+	map: marsTexture
+})
+const moonMaterial = new THREE.MeshStandardMaterial({
+	map: moonTexture
+})
+
 // add stuff here
 const sphereGeometry = new THREE.SphereGeometry(1, 32, 32)
 const sunMaterial = new THREE.MeshBasicMaterial({
-	color: 0xfff700
+	map: sunTexture
 })
 
 const sun = new THREE.Mesh(sphereGeometry, sunMaterial)
 sun.scale.setScalar(5)
+scene.add(sun)
 
 const planets = [
 	{
@@ -72,8 +115,6 @@ const planets = [
 		]
 	}
 ]
-
-scene.add(sun)
 
 // initialize the camera
 const camera = new THREE.PerspectiveCamera(
